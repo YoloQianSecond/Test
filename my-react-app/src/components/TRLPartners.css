@@ -1,0 +1,59 @@
+.pm {
+  padding: 24px 0 10px;
+  background: #fff;
+}
+
+/* Viewport with edge-fade using CSS mask */
+.pm-viewport {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  overflow: hidden;
+  /* edge fade */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+
+/* Track: translates endlessly */
+.pm-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 6vw, 60px);
+  /* Make it wide so the animation is smooth */
+  width: max-content;
+  animation: pm-scroll 26s linear infinite;
+}
+
+/* Pause on hover */
+.pm-viewport:hover .pm-track { animation-play-state: paused; }
+
+/* Each item */
+.pm-item { flex: 0 0 auto; }
+
+.pm-badge {
+  width: clamp(120px, 15vw, 180px);
+  height: clamp(120px, 15vw, 180px);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(255, 94, 87, 0.12); /* subtle pink glow like your shot */
+}
+
+.pm-badge img {
+  max-width: 70%;
+  max-height: 60%;
+  object-fit: contain;
+  filter: grayscale(0%);
+  opacity: 0.95;
+}
+
+/* Animation (left -> right). Reverse if you want right->left */
+@keyframes pm-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50% ); }
+}
+
+/* Respect users that prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pm-track { animation: none; }
+}

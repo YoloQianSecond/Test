@@ -1,0 +1,186 @@
+:root{
+  --bg: #ffffff;
+  --bg-opaque: rgba(255,255,255,0.9);
+  --text: #0f172a;         /* slate-900 */
+  --muted: #475569;        /* slate-600 */
+  --brand: #ff6b57;        /* coral-ish CTA */
+  --accent: #f15a24;       /* orange line vibe */
+  --radius-xl: 28px;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+  color: var(--text);
+  background: #f8fafc;
+}
+
+/* Top announcement/ribbon */
+.announce {
+  width: 100%;
+  background: #f2f4f7;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1;
+  padding: 10px 16px;
+  text-align: center;
+}
+.announce a{
+  color: #d14a3d;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 40px;              /* sits below the announcement bar initially */
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  transition: all .25s ease;
+}
+
+.nav-inner {
+  width: min(1200px, 92%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: var(--radius-xl);
+  transition: all .25s ease;
+  backdrop-filter: blur(6px);
+}
+
+/* Default (transparent over hero) */
+.nav:not(.scrolled) .nav-inner{
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* After scroll (solid) */
+.nav.scrolled{
+  top: 0;                 /* snap to very top when scrolled */
+}
+.nav.scrolled .nav-inner{
+  background: var(--bg-opaque);
+  color: var(--text);
+  border: 1px solid rgba(15,23,42,0.06);
+  box-shadow: var(--shadow);
+}
+
+/* Links */
+.nav .brand {
+  display: flex; gap: 8px; align-items: center;
+  font-weight: 800; letter-spacing: .4px;
+}
+.logo-square{
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg,#00bcd4,#4a90e2);
+  border-radius: 6px;
+}
+.brand span { font-size: 18px; }
+
+.nav ul{
+  display: flex; gap: 22px; margin: 0; padding: 0; list-style: none;
+}
+.nav a{
+  text-decoration: none;
+  font-size: 15px;
+  opacity: .95;
+}
+.nav:not(.scrolled) a{ color: white; }
+.nav.scrolled a{ color: var(--muted); }
+.nav a:hover{ opacity: 1; }
+
+/* CTA */
+.nav .cta{
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: white !important;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-bottom-left-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl);
+}
+
+/* Use your own image; a soft gradient as fallback */
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.15)),
+    url('/hero.jpg') center/cover no-repeat;
+  filter: saturate(1.05) contrast(1.05);
+}
+.hero-content{
+  position: relative;
+  text-align: center;
+  color: white;
+  padding: 0 16px;
+  width: min(1100px, 92%);
+}
+.hero h1{
+  font-size: clamp(28px, 5vw, 64px);
+  line-height: 1.05;
+  margin: 0 0 16px;
+  font-weight: 800;
+}
+.hero h1 .break{ display:block; }
+.hero p{
+  font-size: clamp(14px, 1.8vw, 20px);
+  margin: 0 auto;
+  opacity: .95;
+}
+
+/* Content spacer to allow scrolling */
+.section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 16px 80px;
+}
+
+/* Mobile */
+@media (max-width: 720px){
+  .nav ul { display: none; } /* keep it simple; hide menu for now */
+}
+
+/* styles.css — add near the bottom */
+.big-statement{
+  max-width: 1100px;
+  margin: 48px auto 0;
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.25;
+  /* big but responsive */
+  font-size: clamp(22px, 4.2vw, 48px);
+  /* optional: greenish like the screenshot; tweak as you like */
+  color: #0c3b2e; /* deep green */
+  /* nicer multi-line title wrapping (supported in modern browsers) */
+  text-wrap: balance;
+}
+
+/* tighten the section a bit since this is a headline block */
+.section{
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 16px 80px;
+}
+

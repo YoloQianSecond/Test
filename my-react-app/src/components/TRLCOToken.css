@@ -1,0 +1,192 @@
+.token-utility{
+  background: #fbfdf8;          /* soft off-white */
+  padding: 80px 0 40px;
+}
+
+.tu-wrap{
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tu-title{
+  font-size: clamp(26px, 4vw, 44px);
+  margin: 0 0 10px;
+  font-weight: 900;
+  color: #0e2e22;               /* deep green-ish */
+  text-wrap: balance;
+}
+
+.tu-sub{
+  margin: 0 auto 30px;
+  max-width: 780px;
+  color: #5b6b68;
+  font-size: 15.5px;
+}
+
+/* --- marquee with floating coin --- */
+.tu-marquee{
+  position: relative;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.marquee-track{
+  position: absolute;
+  white-space: nowrap;
+  opacity: .35;
+  color: #7c8a89;
+  font-weight: 700;
+  font-size: clamp(18px, 2.3vw, 26px);
+  animation: tu-marquee 18s linear infinite;
+}
+.marquee-track span{ margin-right: 32px; }
+
+@keyframes tu-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.tu-coin{
+  width: clamp(64px, 8vw, 96px);
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,.15));
+  animation: coinFloat 4.2s ease-in-out infinite;
+}
+@keyframes coinFloat {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50%     { transform: translateY(-10px) rotate(-3deg); }
+}
+
+/* --- grid: image left + copy right --- */
+.tu-grid{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  gap: 48px;
+  align-items: center;
+  text-align: left;
+}
+
+.tu-card{
+  background: linear-gradient(135deg,#ff7a59,#ff5e57 45%,#1ea7ff 100%);
+  border-radius: 20px;
+  padding: 12px;
+  overflow: hidden;
+}
+.tu-card img{
+  width: 100%; height: auto; display: block;
+  border-radius: 16px;
+}
+
+/* right column */
+.tu-eyebrow{
+  color: #2b4a3f;
+  font-weight: 800;
+  margin: 0 0 6px;
+  letter-spacing: .2px;
+}
+.tu-h3{
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 900;
+  margin: 0 0 14px;
+  color: #0e2e22;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  padding-bottom: 8px;
+  max-width: 580px;
+}
+.tu-h3.tu-muted{
+  color: #cfd6d4;
+  border-bottom-color: transparent;
+}
+
+.tu-list{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: grid;
+  gap: 14px;
+  max-width: 720px;
+}
+.tu-list li{
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  align-items: start;
+  color: #42504e;
+  line-height: 1.6;
+  font-size: 15.5px;
+}
+
+/* tiny inline icons (emoji-free, CSS only) */
+.tu-ico{
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 2px;
+  position: relative;
+}
+.tu-ico-earn{
+  background: #ffe6e1;
+}
+.tu-ico-earn::after{
+  content: "★";
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-size: 12px; color: #e85c44; font-weight: 900;
+}
+.tu-ico-gift{
+  background: #e6f5ff;
+}
+.tu-ico-gift::after{
+  content: "🎁";
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-size: 14px;
+}
+
+/* tabs */
+.tu-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tu-tab-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ccc;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s;
+  opacity: 0.5;
+}
+
+.tu-tab-btn.active {
+  color: #222;
+  opacity: 1;
+}
+
+.tu-tab-content {
+  margin-top: 1rem;
+}
+
+.tu-h3 {
+  margin: 0;
+  padding: 0;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .tu-grid{
+    grid-template-columns: 1fr;
+  }
+  .tu-wrap{ text-align: center; }
+  .tu-list li{ grid-template-columns: 24px 1fr; }
+  .tu-h3{ margin-left: auto; margin-right: auto; }
+}

@@ -1,0 +1,101 @@
+.invest{
+  position: relative;
+  padding: 90px 0 70px;
+  background: #fff;
+  overflow: hidden;
+}
+.invest-wrap{
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+/* headline */
+.invest-title{
+  font-size: clamp(34px, 6vw, 80px);
+  line-height: 1.05;
+  font-weight: 900;
+  margin: 40px 0 26px;
+  background: linear-gradient(90deg,#d4534a,#816493,#2f7fb0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.invest-title .ticker{
+  white-space: nowrap;
+}
+
+/* speech bubbles */
+.badge{
+  position: absolute;
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 16px;
+  border: 2px solid currentColor;
+  font-weight: 700;
+  font-size: clamp(12px, 1.4vw, 16px);
+  background: #fff;
+  color: #2274a5;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.08));
+  animation: float 6s ease-in-out infinite;
+}
+.badge::after{
+  content: "";
+  position: absolute;
+  bottom: -10px; left: 18px;
+  width: 12px; height: 12px;
+  border: 2px solid currentColor;
+  border-top: 0; border-left: 0;
+  transform: rotate(45deg);
+  background: #fff;
+}
+
+/* individual placements + colors */
+.badge-a{ top: 10px; left: 16%; color:#2b8db7; animation-delay: 0s; }
+.badge-b{ top: 18px; right: 14%; color:#e35a5a; animation-delay: .6s; }
+.badge-c{ bottom: 130px; left: 24%; color:#f0712c; animation-delay: 1.2s; }
+.badge-d{ bottom: 120px; right: 20%; color:#d4a307; animation-delay: 1.8s; }
+
+@keyframes float{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-8px); }
+}
+
+/* press row */
+.press{
+  margin-top: 22px;
+}
+.press-label{
+  display: block;
+  color: #9aa3ad;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.press-logos{
+  display: inline-flex;
+  gap: clamp(22px, 6vw, 70px);
+  align-items: center;
+}
+.press-logos img{
+  height: 28px;
+  width: auto;
+  display: block;
+  opacity: .85;
+  transition: filter .3s ease, opacity .3s ease, transform .3s ease;
+}
+.press-logos img:hover{
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* responsive: tuck bubbles closer on small screens */
+@media (max-width: 900px){
+  .badge-a{ left: 6%; }
+  .badge-b{ right: 6%; }
+  .badge-c{ left: 8%; bottom: 120px; }
+  .badge-d{ right: 8%; }
+}
+@media (max-width: 640px){
+  .badge{ display:none; } /* keep it clean on very small screens */
+}

@@ -1,0 +1,142 @@
+/* Section container with soft arcs in the background */
+.mk{
+  position: relative;
+  isolation: isolate;
+  padding: 90px 0;
+  background:
+    radial-gradient(1200px 500px at 20% 20%, rgba(255,255,255,.7), transparent 60%),
+    radial-gradient(900px 420px at 65% 0%, rgba(255,255,255,.6), transparent 60%),
+    #fdeff1; /* light pink base */
+}
+
+.mk-wrap{
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* LEFT */
+.mk-eyebrow{
+  color: #b95d68;
+  font-weight: 800;
+  margin: 0 0 8px;
+  letter-spacing: .3px;
+}
+.mk-title{
+  margin: 0 0 18px;
+  font-size: clamp(28px, 4.5vw, 54px);
+  line-height: 1.04;
+  font-weight: 900;
+  color: #0f0f12;
+}
+
+.mk-list{
+  list-style: none;
+  padding: 0; margin: 26px 0 0;
+  display: grid; gap: 18px;
+}
+.mk-list li{
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+}
+.mk-list h4{
+  font-size: 18px; margin: 0 0 6px; font-weight: 800;
+}
+.mk-list p{
+  margin: 0; color:#444; line-height: 1.65;
+  font-size: 15.5px;
+}
+
+/* tiny glyphs */
+.mk-ico{
+  width: 28px; height: 28px; border-radius: 8px;
+  display:inline-block; position: relative;
+  background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,.06);
+}
+.mk-ico::after{
+  position:absolute; inset:0; display:grid; place-items:center;
+  font-size: 14px; font-weight: 900;
+}
+.mk-ico-chart{ background: #ffe9e4; }
+.mk-ico-chart::after{ content: "📈"; }
+.mk-ico-link{ background: #f2f7ff; }
+.mk-ico-link::after{ content: "🔗"; }
+
+/* RIGHT */
+.mk-visual{
+  position: relative;
+  min-height: 420px;
+}
+
+/* back plate behind the phone */
+.mk-plate{
+  position:absolute; right: 2%; top: 8%;
+  width: 78%; height: 72%;
+  border-radius: 36px;
+  background: linear-gradient(140deg,#6ac5ff,#0072a8);
+  filter: blur(0.4px) saturate(1.1);
+}
+
+/* phone mock (supply your own PNG with transparency) */
+.mk-phone{
+  position: absolute;
+  right: 0; top: -10px;
+  width: min(520px, 90%);
+  transform: rotate(6deg);
+  filter: drop-shadow(0 18px 40px rgba(0,0,0,.22));
+  animation: phoneFloat 6s ease-in-out infinite;
+}
+@keyframes phoneFloat{
+  0%,100%{ transform: rotate(6deg) translateY(0); }
+  50%{ transform: rotate(6deg) translateY(-10px); }
+}
+
+/* small media card on top of phone */
+.mk-media{
+  position:absolute;
+  left: 8%;
+  top: 62px;
+  width: min(320px, 60%);
+  aspect-ratio: 16/10;
+  background:#fff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.20);
+  transform: rotate(-6deg);
+}
+.mk-media img{
+  width:100%; height:100%; object-fit: cover; display:block;
+}
+.mk-play{
+  position:absolute; inset:auto auto 10px 10px;
+  border:none; border-radius: 999px; padding: 8px 12px;
+  background: rgba(255,255,255,.9);
+  font-weight: 800; cursor:pointer;
+}
+
+/* subscribe pill */
+.mk-subscribe{
+  position:absolute;
+  left: 36%;
+  bottom: 56px;
+  transform: rotate(-8deg);
+  border:none;
+  background:#ff5e57;
+  color:#fff; font-weight:800;
+  padding: 14px 22px;
+  border-radius: 999px;
+  box-shadow: 0 12px 30px rgba(255,94,87,.45);
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .mk-wrap{ grid-template-columns: 1fr; }
+  .mk-visual{ min-height: 420px; }
+  .mk-phone{ right: 4%; }
+  .mk-media{ left: 6%; }
+  .mk-subscribe{ left: 30%; }
+}

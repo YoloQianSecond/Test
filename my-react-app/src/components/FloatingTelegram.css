@@ -1,0 +1,32 @@
+.tg-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff5e57;
+  color: white;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: tgBounce 2.5s infinite;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.tg-float:hover {
+  background: #e14c47;
+  transform: scale(1.07);
+}
+
+@keyframes tgBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
