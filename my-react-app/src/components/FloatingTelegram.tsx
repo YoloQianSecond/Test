@@ -4,7 +4,7 @@ import "./FloatingTelegram.css";
 const FloatingTelegram: React.FC = () => {
   return (
     <a
-      href="https://t.me/your_telegram_channel" // replace with your actual Telegram link
+      href="https://t.me/trlworld" // replace with your actual Telegram link
       target="_blank"
       rel="noopener noreferrer"
       className="tg-float"

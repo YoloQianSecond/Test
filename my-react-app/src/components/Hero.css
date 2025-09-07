@@ -1,0 +1,99 @@
+:root{
+  --hero-radius: 36px;
+  --hero-max: 1400px;          /* matches your rounded container width */
+}
+
+/* Hero container with large rounded corners */
+.hero{
+  position: relative;
+  width: min(var(--hero-max), 94vw);
+  height: min(88vh, 780px);
+  margin: 32px auto 0;         /* leave some breathing room around */
+  border-radius: var(--hero-radius);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+/* The background image already has the bottom cutout/notch baked in */
+.hero-bg{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 0;
+  /* optional soft overlay for legibility near the top */
+  filter: saturate(1.03) contrast(1.03);
+}
+
+/* Title + subtitle */
+.hero-content{
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 92%);
+  padding: 0 16px;
+}
+.hero-content h1{
+  margin: 0 0 12px;
+  font-weight: 800;
+  line-height: 1.05;
+  font-size: clamp(28px, 6vw, 72px);
+}
+.hero-content h1 .break{ display:block; }
+.hero-content p{
+  margin: 0 auto;
+  opacity: .95;
+  font-size: clamp(14px, 1.6vw, 20px);
+}
+
+/* Gray circular button that sits in the notch */
+.scroll-btn{
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);   /* hangs below the hero edge */
+  width: 76px;                       /* tweak to fit your notch */
+  height: 76px;
+  border-radius: 50%;
+  border: 0;
+  background: #d9dde2;               /* gray circle */
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.12),
+    inset 0 0 0 1px rgba(0,0,0,.08);
+}
+
+/* Arrow image sizing + jump animation */
+.scroll-btn .arrow{
+  width: 26px;              /* adjust if your asset is bigger/smaller */
+  height: 26px;
+  display: block;
+  animation: arrow-jump 1.1s ease-in-out infinite;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.15));
+}
+
+/* Hover/focus */
+.scroll-btn:hover{ background: #cfd4da; }
+.scroll-btn:focus-visible{
+  outline: 3px solid rgba(0,0,0,.25);
+  outline-offset: 3px;
+}
+
+/* Arrow “jump” keyframes */
+@keyframes arrow-jump{
+  0%, 100% { transform: translateY(-2px); opacity: .95; }
+  50%      { transform: translateY(4px);  opacity: 1;   }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .scroll-btn .arrow { animation: none; }
+}
+

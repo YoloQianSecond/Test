@@ -28,7 +28,6 @@ const App: React.FC = () => {
       <InvestHero />
       <SiteFooter />
       <FloatingTelegram />
-
     </>
   );
 };

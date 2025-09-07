@@ -52,10 +52,10 @@
 }
 
 /* individual placements + colors */
-.badge-a{ top: 10px; left: 16%; color:#2b8db7; animation-delay: 0s; }
-.badge-b{ top: 18px; right: 14%; color:#e35a5a; animation-delay: .6s; }
-.badge-c{ bottom: 130px; left: 24%; color:#f0712c; animation-delay: 1.2s; }
-.badge-d{ bottom: 120px; right: 20%; color:#d4a307; animation-delay: 1.8s; }
+.badge-a{ top: -70px; left: 16%; color:#2b8db7; animation-delay: 0s; } /* Invest and earn */
+.badge-b{ top: -65px; right: 14%; color:#e35a5a; animation-delay: .6s; } /* Anytime access */
+.badge-c{ bottom: 170px; left: 24%; color:#f0712c; animation-delay: 1.2s; } /* Community Governance Voting */
+.badge-d{ bottom: 165px; right: 20%; color:#d4a307; animation-delay: 1.8s; } /* Grow Earnings */
 
 @keyframes float{
   0%,100%{ transform: translateY(0); }
@@ -64,7 +64,8 @@
 
 /* press row */
 .press{
-  margin-top: 22px;
+  /* was 22px */
+  margin-top: clamp(200px, 8vh, 140px);
 }
 .press-label{
   display: block;

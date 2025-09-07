@@ -1,94 +1,200 @@
-.token-utility{
-  background: #fbfdf8;          /* soft off-white */
-  padding: 80px 0 40px;
+/* =========================================
+   FULL-SCREEN WRAPPER (splitter + token)
+   ========================================= */
+.trlco-screen {
+  min-height: 100dvh;                 /* fills the display (mobile-safe) */
+  display: grid;
+  grid-template-rows: auto 1fr;       /* splitter = auto height, token = fill */
+  position: relative;
+  z-index: 0;
+
+  /* Panel background — change this to whatever you want */
+  /* Example: translucent white */
+  background-color: rgba(255, 255, 255, 0.13);
+  /* Example solid: background: #f7faf9; */
 }
 
-.tu-wrap{
+/* Children inherit wrapper background so there’s no seam */
+.trlco-screen > .tu-splitter-section,
+.trlco-screen > .token-utility {
+  background: transparent;
+}
+
+/* =========================================
+   SPLITTER (intrinsic size + top crop)
+   ========================================= */
+.tu-splitter-section {
+  display: grid;
+  place-items: center;
+
+  /* tune: crop a bit off the top of the splitter image to remove seam */
+  --split-crop: 10px;                 /* tweak 6–14px to taste */
+
+  /* coin sizing + drop (drop = base - crop) */
+  --coin-size: clamp(74px, 8vw, 140px);
+  --drop-base: clamp(140px, 17vw, 280px);
+  --drop-distance: calc(var(--drop-base) - var(--split-crop));
+}
+
+.ts-wrap {
+  position: relative;
+  display: inline-block;              /* width = image width */
+  isolation: isolate;                 /* stable stacking for coin/shadow */
+}
+
+.ts-notch {
+  display: block;
+  width: auto;                        /* intrinsic width */
+  max-width: min(1160px, 92vw);       /* responsive cap */
+  height: auto;
+
+  /* crop just the TOP of the PNG (with Safari prefix) */
+  -webkit-clip-path: inset(var(--split-crop) 0 0 0);
+          clip-path: inset(var(--split-crop) 0 0 0);
+}
+
+/* Coin drop (reversible with .landed toggle) */
+.ts-coin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--coin-size);
+  height: auto;
+  transform: translate(-50%, calc(-50% - 4px));  /* resting on notch */
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.18));
+  z-index: 2;
+  transition: transform 680ms cubic-bezier(.2,.9,.15,1);
+}
+.ts-coin.landed {
+  transform: translate(-50%, calc(-50% + var(--drop-distance)));
+}
+
+.ts-coin-shadow {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 14px);
+  width: 140px; height: 140px;
+  transform: translate(-50%, -50%) scale(.4);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.18), rgba(0,0,0,0));
+  filter: blur(10px);
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 400ms ease, transform 680ms ease, filter 680ms ease;
+}
+.ts-coin-shadow.landed {
+  opacity: .35;
+  transform: translate(-50%, -50%) scale(1);
+  filter: blur(14px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ts-coin { transform: translate(-50%, calc(-50% + var(--drop-distance))); transition: none; }
+  .ts-coin-shadow { opacity: .35; transform: translate(-50%, -50%) scale(1); transition: none; }
+}
+
+/* =========================================
+   TOKEN SECTION (fills remaining space)
+   ========================================= */
+.token-utility {
+  /* no background here; wrapper owns it */
+  position: relative;
+  padding: 36px 0 40px;               /* tight to the coin/banner stack */
+  min-height: 0;                      /* don’t fight the wrapper’s 100dvh */
+  overflow: visible;                  /* avoid clipping on some browsers */
+}
+
+.tu-wrap {
   width: min(1200px, 92%);
   margin: 0 auto;
   text-align: center;
 }
 
-.tu-title{
+.tu-title {
   font-size: clamp(26px, 4vw, 44px);
   margin: 0 0 10px;
   font-weight: 900;
-  color: #0e2e22;               /* deep green-ish */
+  color: #0e2e22;
   text-wrap: balance;
 }
 
-.tu-sub{
+.tu-sub {
   margin: 0 auto 30px;
   max-width: 780px;
   color: #5b6b68;
   font-size: 15.5px;
 }
 
-/* --- marquee with floating coin --- */
-.tu-marquee{
-  position: relative;
+/* =========================================
+   Seamless, slow marquee (two segments)
+   ========================================= */
+.tu-marquee {
   height: 120px;
-  display: grid;
-  place-items: center;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(10px, 2.2vw, 22px);
   margin-bottom: 28px;
+
+  /* subtle edge fade */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
 
-.marquee-track{
-  position: absolute;
+.marquee-inner {
+  display: flex;
+  width: max-content;
+  animation: marquee-slide 38s linear infinite;   /* slow & seamless */
+  will-change: transform;
+}
+
+.marquee-seg {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-right: 32px;                 /* keeps spacing consistent at the seam */
   white-space: nowrap;
-  opacity: .35;
   color: #7c8a89;
+  opacity: .35;
   font-weight: 700;
-  font-size: clamp(18px, 2.3vw, 26px);
-  animation: tu-marquee 18s linear infinite;
+  font-size: clamp(18px, 2.1vw, 26px);
 }
-.marquee-track span{ margin-right: 32px; }
 
-@keyframes tu-marquee {
+@keyframes marquee-slide {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); } /* exactly one segment width */
 }
 
-.tu-coin{
-  width: clamp(64px, 8vw, 96px);
-  filter: drop-shadow(0 12px 20px rgba(0,0,0,.15));
-  animation: coinFloat 4.2s ease-in-out infinite;
-}
-@keyframes coinFloat {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  50%     { transform: translateY(-10px) rotate(-3deg); }
-}
+/* =========================================
+   “How this works” grid (centered)
+   ========================================= */
+.tu-grid {
+  max-width: 850px;                    /* center the whole block under the coin */
+  margin-inline: auto;
 
-/* --- grid: image left + copy right --- */
-.tu-grid{
-  margin-top: 10px;
   display: grid;
-  grid-template-columns: 520px 1fr;
-  gap: 48px;
+  grid-template-columns: minmax(340px, 460px) minmax(420px, 1fr);
+  gap: 44px;
   align-items: center;
   text-align: left;
 }
 
-.tu-card{
-  background: linear-gradient(135deg,#ff7a59,#ff5e57 45%,#1ea7ff 100%);
+.tu-card {
   border-radius: 20px;
-  padding: 12px;
   overflow: hidden;
+  justify-self: end;                    /* nudges the image toward center */
 }
-.tu-card img{
-  width: 100%; height: auto; display: block;
-  border-radius: 16px;
+.tu-card img {
+  width: 100%;
+  height: auto;                         /* full artwork, scaled */
+  display: block;
+  border-radius: 20px;
 }
 
 /* right column */
-.tu-eyebrow{
-  color: #2b4a3f;
-  font-weight: 800;
-  margin: 0 0 6px;
-  letter-spacing: .2px;
-}
-.tu-h3{
+.tu-eyebrow { color: #000000; font-weight: 800; margin: 0 0 6px; letter-spacing: .2px; }
+.tu-h3 {
   font-size: clamp(22px, 2.4vw, 32px);
   font-weight: 900;
   margin: 0 0 14px;
@@ -97,12 +203,9 @@
   padding-bottom: 8px;
   max-width: 580px;
 }
-.tu-h3.tu-muted{
-  color: #cfd6d4;
-  border-bottom-color: transparent;
-}
+.tu-h3.tu-muted { color: #cfd6d4; border-bottom-color: transparent; }
 
-.tu-list{
+.tu-list {
   list-style: none;
   padding: 0;
   margin: 0 0 22px;
@@ -110,7 +213,7 @@
   gap: 14px;
   max-width: 720px;
 }
-.tu-list li{
+.tu-list li {
   display: grid;
   grid-template-columns: 28px 1fr;
   gap: 12px;
@@ -120,73 +223,61 @@
   font-size: 15.5px;
 }
 
-/* tiny inline icons (emoji-free, CSS only) */
-.tu-ico{
-  width: 22px; height: 22px;
-  border-radius: 6px;
-  display: inline-block;
-  margin-top: 2px;
-  position: relative;
-}
-.tu-ico-earn{
-  background: #ffe6e1;
-}
-.tu-ico-earn::after{
-  content: "★";
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
-  font-size: 12px; color: #e85c44; font-weight: 900;
-}
-.tu-ico-gift{
-  background: #e6f5ff;
-}
-.tu-ico-gift::after{
-  content: "🎁";
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
-  font-size: 14px;
-}
+/* tiny inline icons */
+.tu-ico { width: 22px; height: 22px; border-radius: 6px; display: inline-block; margin-top: 2px; position: relative; }
+.tu-ico-earn { background: #ffe6e1; }
+.tu-ico-earn::after { content: "★"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 12px; color: #e85c44; font-weight: 900; }
+.tu-ico-gift { background: #e6f5ff; }
+.tu-ico-gift::after { content: "🎁"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 14px; }
 
 /* tabs */
-.tu-tabs {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
+.tu-tabs { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1rem; }
+.tu-tab-btn { background: none; border: none; font-size: 2rem; font-weight: 700; color: #ccc; text-align: left; cursor: pointer; transition: color .2s; opacity: .5; }
+.tu-tab-btn.active { color: #222; opacity: 1; }
+.tu-tab-content { margin-top: 1rem; }
+.tu-h3 { margin: 0; padding: 0; }
 
-.tu-tab-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #ccc;
-  text-align: left;
-  cursor: pointer;
-  transition: color 0.2s;
-  opacity: 0.5;
-}
-
-.tu-tab-btn.active {
-  color: #222;
-  opacity: 1;
-}
-
-.tu-tab-content {
-  margin-top: 1rem;
-}
-
-.tu-h3 {
-  margin: 0;
-  padding: 0;
-}
-
-/* responsive */
-@media (max-width: 980px){
-  .tu-grid{
+/* =========================================
+   Responsive
+   ========================================= */
+@media (max-width: 980px) {
+  .tu-grid {
+    max-width: none;
     grid-template-columns: 1fr;
+    gap: 28px;
   }
-  .tu-wrap{ text-align: center; }
-  .tu-list li{ grid-template-columns: 24px 1fr; }
-  .tu-h3{ margin-left: auto; margin-right: auto; }
+  .tu-card { justify-self: center; }
+  .tu-wrap { text-align: center; }
+  .tu-list li { grid-template-columns: 24px 1fr; }
+  .tu-h3 { margin-left: auto; margin-right: auto; }
+}
+
+/* 1) Solid panel background (no grey tint) */
+.trlco-screen{
+  /* hard background for the whole section */
+  background: #fbfdf8;   /* <- set whatever you want here */
+}
+
+/* 2) Make sure the coin is ABOVE the banner when it drops */
+.trlco-screen{ position: relative; z-index: 0; }
+
+.tu-splitter-section{             /* the band with the notch */
+  position: relative;
+  z-index: 3;                     /* paints above the token block */
+}
+
+.ts-wrap{
+  position: relative;             /* keep it positioned so z-index applies */
+  z-index: 3;                     /* ensure coin/shadow are on top */
+}
+
+.token-utility{
+  position: relative;
+  z-index: 1;                     /* sits below the splitter/coin */
+}
+
+/* The banner itself should not create a higher stacking context */
+.tu-marquee{
+  position: relative;
+  z-index: 0;                     /* explicitly below the coin */
 }

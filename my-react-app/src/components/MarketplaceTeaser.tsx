@@ -41,17 +41,8 @@ const MarketplaceTeaser: React.FC = () => {
 
         {/* Right */}
         <div className="mk-visual">
-          {/* back gradient plate */}
-          <div className="mk-plate" aria-hidden />
           {/* phone */}
-          <img src="/phone.png" alt="TRL Marketplace app" className="mk-phone" />
-          {/* small media card on top */}
-          <div className="mk-media">
-            <img src="/room.jpg" alt="Property media" />
-            <button className="mk-play" aria-label="Play video">▶</button>
-          </div>
-          {/* subscribe pill */}
-          <button className="mk-subscribe">Subscribe now</button>
+          <img src="/landingpage/comingsoon/unlockfeature.png" alt="TRL Marketplace app" className="mk-phone" />
         </div>
       </div>
     </section>

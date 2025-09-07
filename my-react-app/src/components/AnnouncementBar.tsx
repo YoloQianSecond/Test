@@ -3,8 +3,8 @@ import React from "react";
 const AnnouncementBar: React.FC = () => {
   return (
     <div className="announce">
-      Malaysia launches first Real Estate RWA project — TRL — to tokenize $23M in properties.{" "}
-      <a href="#" aria-label="Read more about the announcement">Read More</a>
+      Malaysia Launches First Real Estate RWA Project — TRL — to Tokenize $23 Million in Properties.{" "}
+      <a href="https://www.benzinga.com/content/40224462/malaysia-launches-first-real-estate-rwa-project-trl-to-tokenize-23-million-in-properties" aria-label="Read more about the announcement">Read More</a>
     </div>
   );
 };

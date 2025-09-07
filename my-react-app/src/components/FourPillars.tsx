@@ -4,24 +4,28 @@ import "./FourPillars.css";
 const pillars = [
   {
     title: "Live seamlesss",
-    desc: "Our streamlined procedures make these processes transparent, flexible, secure, and affordable. We belive taht simplicity is the key to enjoying life's greatest pleasures.",
-    color: "linear-gradient(135deg,#ffb199,#ff0844)"
+    desc:
+      "Our streamlined procedures make these processes transparent, flexible, secure, and affordable. We belive taht simplicity is the key to enjoying life's greatest pleasures.",
+    img: "/landingpage/pillars/pillar1.png", // <-- your image
   },
   {
     title: "Live borderless",
-    desc: "Our services and solutions support a modern lifestyle, allowing you to seamlessly transition between different aspects of your life, no matter where you are.",
-    color: "linear-gradient(135deg,#ffdf91,#ffb347)"
+    desc:
+      "Our services and solutions support a modern lifestyle, allowing you to seamlessly transition between different aspects of your life, no matter where you are.",
+    img: "/landingpage/pillars/pillar2.png",
   },
   {
     title: "Live for real",
-    desc: "Our global passport and interconnected ecosystem are designed to break down barriers and provide equal access to opportunities.",
-    color: "linear-gradient(135deg,#6dd5fa,#2980b9)"
+    desc:
+      "Our global passport and interconnected ecosystem are designed to break down barriers and provide equal access to opportunities.",
+    img: "/landingpage/pillars/pillar3.png",
   },
   {
     title: "Live connected",
-    desc: "We foster a vibrant community where members can connect, collaborate, and grow together, making every experience more meaningful.",
-    color: "linear-gradient(135deg,#b2ffb2,#00c853)"
-  }
+    desc:
+      "We foster a vibrant community where members can connect, collaborate, and grow together, making every experience more meaningful.",
+    img: "/landingpage/pillars/pillar4.png",
+  },
 ];
 
 const FourPillars: React.FC = () => {
@@ -49,7 +53,11 @@ const FourPillars: React.FC = () => {
         {/* Cards Carousel */}
         <div className="pillars-grid">
           {pillars.slice(startIndex, startIndex + visibleCount).map((p, i) => (
-            <div className="pillar-card" key={i + startIndex} style={{ background: p.color }}>
+            <div
+              className="pillar-card"
+              key={i + startIndex}
+              style={{ ['--bg-url' as any]: `url(${p.img})` }}  // 👈 feed image to CSS
+            >
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
             </div>
