@@ -1,137 +1,163 @@
 /* Section shell */
-.pillars{
-  background:#fff;
-  padding:80px 0 60px;
+.pillars {
+  background: #fff;
+  padding: 80px 0 60px;
 }
-.pillars-wrap{
-  width:min(1200px,92%);
-  margin:0 auto;
-  text-align:center;
+.pillars-wrap {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  text-align: center;
 }
-.pillars-title{
-  font-size:clamp(26px,4vw,40px);
-  font-weight:900;
-  margin-bottom:8px;
+.pillars-title {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 900;
+  margin-bottom: 8px;
 }
-.pillars-sub{
-  color:#555;
-  max-width:700px;
-  margin:0 auto 40px;
-  font-size:15.5px;
+.pillars-sub {
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  font-size: 15.5px;
 }
 
 /* Cards row + nav */
-.pillars-grid{
-  position:relative;
-  display:flex;
-  gap:2rem;
-  justify-content:center;
-  align-items:stretch;
-  margin-bottom:50px;
+.pillars-grid {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 50px;
 }
 
-/* === Pillar card (reference-style) ===
-   White card; image ‘plate’ lives on the right via ::before,
-   with a slanted top-left and rounded feel. */
-.pillar-card{
-  position:relative;
-  background:#fff;
-  border-radius:22px;
-  box-shadow:0 14px 28px rgba(0,0,0,.08);
-  min-height:340px;
-  width:min(360px,30vw);
-  padding:36px 28px 32px 32px;  /* breathing room for the text */
-  overflow:hidden;
-  text-align:left;
-  color:#111;                   /* black copy */
-  isolation:isolate;            /* keep layers tidy */
-  transition:transform .3s ease, box-shadow .3s ease;
+/* Pillar card — no white/rounded container */
+.pillar-card {
+  position: relative;
+  min-height: 360px;
+  width: min(380px, 32vw);
+  padding: 36px 34px 34px 34px; /* text padding only */
+  overflow: hidden;
+  text-align: left;
+  color: #111;
+  isolation: isolate;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: none;     /* remove white container */
+  border-radius: 0;     /* remove rounded container */
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08); /* optional soft lift */
 }
-.pillar-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 18px 34px rgba(0,0,0,.1);
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.1);
 }
 
-/* Image plate on the right */
-.pillar-card::before{
-  content:"";
-  position:absolute;
-  inset:16px 16px 16px 40%;        /* left = 40% keeps the heading area */
-  background: var(--bg-url) center/cover no-repeat;
-  /* create the house-ish silhouette: slanted TL + rounded feel */
-  -webkit-clip-path: polygon(16% 0, 100% 0, 100% 85%, 74% 100%, 0 100%, 0 16%);
-          clip-path: polygon(16% 0, 100% 0, 100% 85%, 74% 100%, 0 100%, 0 16%);
-  border-radius:22px;
-  z-index:0;
-  filter:saturate(1.05);
+/* PNG shape as full background */
+.pillar-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;               /* cover the entire card */
+  z-index: 0;
+  background-image: var(--bg-url);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-/* Headline & copy (sit above the plate) */
-.pillar-card h3{
-  position:relative;
-  z-index:1;
-  margin:0 0 14px;
-  font-size:clamp(22px,2.6vw,34px); /* nice big heading like the ref */
-  font-weight:900;
-  color:#0a0a0a;
-  max-width: 48ch;                  /* keeps it tidy on wide screens */
+/* Text sits above the background */
+.pillar-card h3,
+.pillar-card p {
+  position: relative;
+  z-index: 1;
 }
-.pillar-card p{
-  position:relative;
-  z-index:1;
-  margin:0;
-  font-size:16px;
-  line-height:1.65;
-  color:#1f2937;                    /* deep gray/black for readability */
-  max-width: 58ch;
+.pillar-card h3 {
+  margin: 0 0 14px;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 900;
+  color: #0a0a0a;
+  line-height: 1.05;
+  max-width: 18ch;
+}
+.pillar-card p {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: #1f2937;
+  max-width: 56ch;
 }
 
-/* Logos / footer bits (unchanged) */
-.pillars-logos-title{
-  margin:40px 0 10px;
-  font-size:20px;
-  font-weight:800;
+/* Logos / footer */
+.pillars-logos-title {
+  margin: 40px 0 10px;
+  font-size: 20px;
+  font-weight: 800;
 }
-.pillars-logos-sub{
-  font-size:14.5px;
-  color:#666;
-  margin-bottom:26px;
+.pillars-logos-sub {
+  font-size: 14.5px;
+  color: #666;
+  margin-bottom: 26px;
 }
-.pillars-logos{
-  display:flex; justify-content:center; align-items:center;
-  gap:40px; margin-bottom:30px;
+.pillars-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 30px;
 }
-.pillars-logos img{ height:36px; transition:filter .3s; }
-.pillars-logos img:hover{ filter:grayscale(0); }
+.pillars-logos img {
+  height: 36px;
+  transition: filter 0.3s;
+}
+.pillars-logos img:hover {
+  filter: grayscale(0);
+}
 
 /* CTA */
-.pillars-btn{
-  background:#ff5e57; color:#fff; border:none;
-  padding:12px 28px; font-weight:700; font-size:15px;
-  border-radius:50px; cursor:pointer; transition:background .3s;
+.pillars-btn {
+  background: #ff5e57;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
-.pillars-btn:hover{ background:#e14c47; }
+.pillars-btn:hover {
+  background: #e14c47;
+}
 
-/* Carousel arrows (as you had) */
-.pillars-nav-btn{
-  position:absolute; top:50%; transform:translateY(-50%);
-  background:#eee; border:none; border-radius:50%;
-  width:40px; height:40px; font-size:1.5rem; cursor:pointer; z-index:3;
-  opacity:.9; transition:background .2s, transform .15s;
+/* Carousel arrows */
+.pillars-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #eee;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0.9;
+  transition: background 0.2s, transform 0.15s;
 }
-.pillars-nav-btn:hover{ transform:translateY(-50%) scale(1.06); }
-.pillars-nav-btn.prev{ left:-6px; }
-.pillars-nav-btn.next{ right:-6px; }
-.pillars-nav-btn:disabled{ opacity:.4; cursor:not-allowed; }
+.pillars-nav-btn:hover {
+  transform: translateY(-50%) scale(1.06);
+}
+.pillars-nav-btn.prev { left: -6px; }
+.pillars-nav-btn.next { right: -6px; }
+.pillars-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
 /* Responsive tweaks */
-@media (max-width: 1100px){
-  .pillar-card{ width:min(420px,44vw); }
-  .pillar-card::before{ inset:14px 14px 14px 44%; }
+@media (max-width: 1100px) {
+  .pillar-card { width: min(440px, 46vw); }
 }
-@media (max-width: 820px){
-  .pillars-grid{ flex-direction:column; align-items:center; }
-  .pillar-card{ width:100%; max-width:640px; }
-  .pillar-card::before{ inset:14px 14px 14px 46%; }
-  .pillars-nav-btn{ display:none; }
+@media (max-width: 820px) {
+  .pillars-grid { flex-direction: column; align-items: center; }
+  .pillar-card { width: 100%; max-width: 640px; }
+  .pillars-nav-btn { display: none; }
 }

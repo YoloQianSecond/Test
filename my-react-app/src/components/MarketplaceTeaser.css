@@ -41,6 +41,7 @@
 .mk-eyebrow{
   color: #b95d68;
   font-weight: 800;
+  font-size: 50px;
   margin: 0 0 8px;
   letter-spacing: .3px;
 }

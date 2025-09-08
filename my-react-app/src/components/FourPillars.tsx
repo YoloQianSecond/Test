@@ -58,8 +58,10 @@ const FourPillars: React.FC = () => {
               key={i + startIndex}
               style={{ ['--bg-url' as any]: `url(${p.img})` }}  // 👈 feed image to CSS
             >
+                <div className="pillar-card-content">
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
+              </div>
             </div>
           ))}
           <button
