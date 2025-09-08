@@ -3,7 +3,7 @@
 .ins{
   --media-col-min: 300px;                     /* min width of left column   */
   --media-col-max: 460px;                     /* max width of left column   */
-  --media-max-h:  clamp(220px, 32vw, 340px);  /* maximum image height       */
+  --media-max-h:  clamp(220px, 32vw, 500px);  /* maximum image height       */
 
   position: relative;
   padding: 56px 0 40px;
@@ -12,7 +12,7 @@
 .ins-wrap { width: min(1200px,92%); margin: 0 auto; }
 .ins-title {
   text-align: center;
-  font-size: clamp(22px, 3.2vw, 28px);
+  font-size: clamp(22px, 3.2vw, 50px);
   font-weight: 900;
   margin: 0 0 14px;
 }
@@ -48,7 +48,6 @@
   min-width:100%;
   display:grid;
   grid-template-columns: minmax(var(--media-col-min), var(--media-col-max)) 1fr;
-  gap:24px;
   align-items: stretch;
   padding:12px 18px;
 }
@@ -68,10 +67,9 @@
 }
 .ins-media img{
   grid-area: 1 / 1;
-  width: auto;
+  width: 100%;
   height: auto;            /* keep natural ratio */
   max-width: 100%;
-  /* cap overall size so it doesn't get too tall */
   max-height: var(--media-max-h, 340px);
   display: block;
 
