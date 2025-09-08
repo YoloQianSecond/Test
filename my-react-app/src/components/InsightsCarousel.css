@@ -50,6 +50,7 @@
   grid-template-columns: minmax(var(--media-col-min), var(--media-col-max)) 1fr;
   align-items: stretch;
   padding:12px 18px;
+  font-size:20px;
 }
 
 /* MEDIA (clickable thumbnail) */
@@ -112,10 +113,18 @@
 .ins-card-footer{
   display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:center;
 }
-.ins-avatar{ width:44px; height:44px; border-radius:50%; object-fit:cover; }
-.ins-meta{ line-height:1.2; }
+.ins-avatar {
+  width: clamp(32px, 4vw, 100px);  /* scales between 32px and 44px */
+  height: clamp(32px, 4vw, 100px);
+  border-radius: 25%;             /* keeps it circular */
+  object-fit: cover;
+}
+.ins-meta{ line-height:1.; }
 .ins-author{ font-weight:800; }
-.ins-role{ color:#6a736e; font-size:13.5px; }
+.ins-role {
+  color: #6a736e;
+  font-size: clamp(14px, 1.6vw, 20px);
+}
 
 /* CONNECTED TAIL + QUOTE */
 .ins-tail{

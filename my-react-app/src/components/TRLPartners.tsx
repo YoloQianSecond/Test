@@ -14,8 +14,7 @@ const LINES = [
   "We are the world's first 360 RWA ecosystem",
   "that drives the flywheel effect for both the",
   "consumer and investor when it comes to real",
-  "estate living, tokenization, DeFi systems and",
-  "utility rewards.",
+  "estate living, tokenization, DeFi systems and utility rewards.",
 ];
 
 const TRLPartners: React.FC = () => {
