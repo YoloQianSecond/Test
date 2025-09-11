@@ -1,0 +1,15 @@
+/* Top announcement/ribbon */
+.announce {
+  width: 100%;
+  background: #f6f6f2;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1rem;
+  padding: 16px 16px;
+  text-align: center;
+}
+.announce a{
+  color: #d14a3d;
+  text-decoration: underline;
+  font-weight: 600;
+}

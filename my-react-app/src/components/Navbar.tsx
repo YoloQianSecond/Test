@@ -122,8 +122,11 @@ const Navbar: React.FC = () => {
     <nav ref={navRef} className={`nav ${scrolled ? "scrolled" : ""}`} aria-label="Main">
       <div className="nav-inner">
         <a className="brand" href="/">
-          <span className="logo-square" aria-hidden />
-          <span className="brand-text">trl</span>
+          <img
+            src="/landingpage/navbar/trllogo.svg"
+            alt="TRL Logo"
+            className="brand-logo"
+          />
         </a>
 
         <ul className="topnav" role="menubar" aria-label="Primary navigation">
@@ -146,7 +149,7 @@ const Navbar: React.FC = () => {
                     <span className="caret" aria-hidden />
                   </button>
                 ) : (
-                  <a className="topnav-link" role="menuitem" href="/contact">
+                  <a className="topnav-btn no-caret" role="menuitem" href="/contact">
                     Contact
                   </a>
                 )}

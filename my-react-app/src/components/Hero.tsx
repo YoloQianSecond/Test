@@ -9,12 +9,21 @@ const Hero: React.FC = () => {
 
   return (
     <header className="hero">
-      {/* background image that already has the bottom cutout */}
       <img
         className="hero-bg"
-        src="/landingpage/hero/homebanner.png"   // <-- your image with the hole
-        alt=""
-        aria-hidden
+        src="/landingpage/hero/homebanner.png"
+        alt="City skyline background"
+      />
+
+      <img
+        className="cloud cloud-left"
+        src="/landingpage/hero/leftcloud.png"
+        alt="Left cloud"
+      />
+      <img
+        className="cloud cloud-right"
+        src="/landingpage/hero/rightcloud.png"
+        alt="Right cloud"
       />
 
       <div className="hero-content">
@@ -26,10 +35,18 @@ const Hero: React.FC = () => {
         </p>
       </div>
 
-      {/* round scroll button sitting inside the cutout */}
-        <button className="scroll-btn" onClick={onScrollDown} aria-label="Scroll down">
-          <img className="arrow" src="/landingpage/hero/arrowdown.png" alt="" aria-hidden />
-        </button>
+      <button
+        className="scroll-btn"
+        onClick={onScrollDown}
+        aria-label="Scroll down"
+      >
+        <img
+          className="arrow"
+          src="/landingpage/hero/arrowdown.png"
+          alt=""
+          aria-hidden
+        />
+      </button>
     </header>
   );
 };

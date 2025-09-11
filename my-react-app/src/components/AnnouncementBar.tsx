@@ -1,4 +1,5 @@
 import React from "react";
+import "./AnnouncementBar.css";
 
 const AnnouncementBar: React.FC = () => {
   return (
