@@ -140,7 +140,7 @@
 
 /* Logo image (the asset itself is circular) */
 .pm-logo{
-  width: clamp(120px, 10vw, 180px);
+  width: clamp(200px, 10vw, 250px);
   height: auto;
   display: block;
   border-radius: 50%;
