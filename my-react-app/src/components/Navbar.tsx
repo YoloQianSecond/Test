@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./navbar.css";
+import "./Navbar.css";
 
 /** ---------- DATA (public-path image strings) ---------- */
 type MenuLink = {
