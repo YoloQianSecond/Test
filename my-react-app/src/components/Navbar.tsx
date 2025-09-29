@@ -2,93 +2,60 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Navbar.css";
 
 /** ---------- DATA (public-path image strings) ---------- */
-type MenuLink = {
-  label: string;
-  href: string;
-  external?: boolean;
-};
-
-type InvestmentCard = {
-  title: string;
-  href: string;
-  badge?: string;
-  muted?: boolean;
-  img?: string;
-};
-
+type MenuLink = { label: string; href: string; external?: boolean };
+type InvestmentCard = { title: string; href: string; badge?: string; muted?: boolean; img?: string };
 type MegaConfig = {
   key: string;
   label: string;
   items: MenuLink[] | InvestmentCard[];
-  image?: { src: string; alt: string }; // optional – not used for Investments
+  image?: { src: string; alt: string };
+};
+
+type NavbarProps = {
+  /** landing = animated/transparent on top; static = solid on all pages */
+  mode?: "landing" | "static";
 };
 
 const MENUS: MegaConfig[] = [
-  {
-    key: "investments",
-    label: "Investments",
-    items: [
-      {
-        title: "United Arab Emirates",
-        href: "https://trlx1.trlco.world/",
-        img: "/landingpage/navbar/UAE.png",
-      },
-      {
-        title: "Kuala Lumpur",
-        href: "/investments/kuala-lumpur",
-        badge: "Coming Soon",
-        muted: true,
-        img: "/landingpage/navbar/KualaLumpur.png",
-      },
-      {
-        title: "Bali",
-        href: "/investments/bali",
-        badge: "Coming Soon",
-        muted: true,
-        img: "/landingpage/navbar/Bali.png",
-      },
-    ],
-    // no right hero image for investments
-  },
+  // {
+  //   key: "investments",
+  //   label: "Investments",
+  //   items: [
+  //     { title: "Johor, Malaysia", href: "", badge: "COMPLETED", muted: true, img: "/landingpage/navbar/KualaLumpur.png" },
+  //     { title: "Bali, Indonesia", href: "", badge: "Coming Soon", muted: true, img: "/landingpage/navbar/Bali.png" },
+  //     { title: "Dubai, UAE", href: "", badge: "Coming Soon", muted: true, img: "/landingpage/navbar/UAE.png" },
+  //   ],
+  // },
   {
     key: "token",
     label: "Token Ecosystem",
     items: [
-      { label: "Roadmap", href: "https://trlco.world/roadmap" },
-      { label: "TRL Ecosystem", href: "https://trlco.world/ecosystem" },
-      { label: "Whitepaper", href: "https://trlco.world/", external: true },
+      { label: "Roadmap", href: "/roadmap" },
+      { label: "TRL Ecosystem", href: "/ecosystem" },
+      { label: "Whitepaper", href: "https://whitepaper.trlco.world/trl", external: true },
     ],
     image: { src: "/landingpage/navbar/navtoken.png", alt: "Token artwork" },
-  },
-  {
-    key: "learn",
-    label: "Learn",
-    items: [
-      { label: "Blog", href: "/blog" },
-      { label: "How to buy", href: "/learn/how-to-buy" },
-      { label: "FAQ", href: "/faq" },
-    ],
-    image: { src: "/landingpage/navbar/blog.png", alt: "Stack of books" },
   },
   {
     key: "company",
     label: "Company",
     items: [
       { label: "About", href: "/about" },
-      { label: "Media Release", href: "/media" },
+      // { label: "Contact Us", href: "/contact" },
     ],
     image: { src: "/landingpage/navbar/company.png", alt: "Modern building" },
   },
-  { key: "contact", label: "Contact", items: [] },
 ];
 
-const Navbar: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
+const Navbar: React.FC<NavbarProps> = ({ mode = "landing" }) => {
+  // static mode starts solid and never changes; landing starts transparent then solidifies on scroll
+  const [scrolled, setScrolled] = useState(mode === "static");
   const [openKey, setOpenKey] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
 
-  // sticky color change
+  // sticky color change — only attach in landing mode
   useEffect(() => {
+    if (mode !== "landing") return;
     let ticking = false;
     const onScroll = () => {
       if (!ticking) {
@@ -102,7 +69,7 @@ const Navbar: React.FC = () => {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [mode]);
 
   // close on Esc / outside click
   useEffect(() => {
@@ -119,14 +86,14 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav ref={navRef} className={`nav ${scrolled ? "scrolled" : ""}`} aria-label="Main">
+    <nav
+      ref={navRef}
+      className={`nav ${scrolled ? "scrolled" : ""} ${mode === "static" ? "static" : ""}`}
+      aria-label="Main"
+    >
       <div className="nav-inner">
         <a className="brand" href="/">
-          <img
-            src="/landingpage/navbar/trllogo.svg"
-            alt="TRL Logo"
-            className="brand-logo"
-          />
+          <img src="/landingpage/navbar/trllogo.svg" alt="TRL Logo" className="brand-logo" />
         </a>
 
         <ul className="topnav" role="menubar" aria-label="Primary navigation">
@@ -156,26 +123,20 @@ const Navbar: React.FC = () => {
 
                 {hasMega && isOpen && (
                   <div
-                    className={`mega ${isCards ? "cards" : "list"} ${
-                      !isCards && menu.image?.src ? "has-media" : ""
-                    }`}
+                    className={`mega ${isCards ? "cards" : "list"} ${!isCards && menu.image?.src ? "has-media" : ""}`}
                     role="group"
                     aria-label={`${menu.label} menu`}
                   >
                     <div className={`mega-links ${isCards ? "cards" : "list"}`}>
                       {isCards
                         ? (menu.items as InvestmentCard[]).map(item => (
-                            <a
-                              key={item.href}
-                              className={`mega-card ${item.muted ? "muted" : ""}`}
-                              href={item.href}
-                            >
+                            <div key={item.title} className={`mega-card ${item.muted ? "muted" : ""} disabled`} aria-disabled="true">
                               <div className="mega-card-head">
                                 <span className="mega-card-title">{item.title}</span>
-                                {item.badge && <span className="badge">{item.badge}</span>}
+                                {item.badge && <span className="status-badge">{item.badge}</span>}
                               </div>
                               {item.img && <img src={item.img} alt="" aria-hidden />}
-                            </a>
+                            </div>
                           ))
                         : (menu.items as MenuLink[]).map(item => (
                             <a
@@ -187,13 +148,7 @@ const Navbar: React.FC = () => {
                             >
                               <span>{item.label}</span>
                               {item.external && (
-                                <svg
-                                  className="external"
-                                  width="16"
-                                  height="16"
-                                  viewBox="0 0 24 24"
-                                  aria-hidden
-                                >
+                                <svg className="external" width="16" height="16" viewBox="0 0 24 24" aria-hidden>
                                   <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z" />
                                   <path d="M5 5h5v2H7v10h10v-3h2v5H5z" />
                                 </svg>
@@ -202,7 +157,6 @@ const Navbar: React.FC = () => {
                           ))}
                     </div>
 
-                    {/* right column (NOT shown for investments) */}
                     {!isCards && menu.image?.src && (
                       <div className="mega-media">
                         <img src={menu.image.src} alt={menu.image.alt} />
@@ -215,8 +169,8 @@ const Navbar: React.FC = () => {
           })}
         </ul>
 
-        <a className="cta" href="/app">
-          Enter App
+        <a className="cta" href="https://trl.world/">
+          Enter Presale
         </a>
       </div>
     </nav>

@@ -5,7 +5,6 @@ const logos = [
   { src: "/landingpage/partners/IXSwap.png", alt: "IXSwap" },
   { src: "/landingpage/partners/Base.png", alt: "Base" },
   { src: "/landingpage/partners/Skale.png", alt: "Skale" },
-  { src: "/landingpage/partners/LydianLabs.png", alt: "LydianLabs" },
   { src: "/landingpage/partners/IOTA.png", alt: "IOTA" },
   { src: "/landingpage/partners/Uniswap.png", alt: "Uniswap" },
 ];
@@ -14,7 +13,8 @@ const LINES = [
   "We are the world's first 360 RWA ecosystem",
   "that drives the flywheel effect for both the",
   "consumer and investor when it comes to real",
-  "estate living, tokenization, DeFi systems and utility rewards.",
+  "estate living, tokenization, DeFi systems",
+  "and utility rewards.",
 ];
 
 const TRLPartners: React.FC = () => {

@@ -98,7 +98,12 @@ const FourPillars: React.FC = () => {
           <img src="/500.png" alt="500 Startups" />
         </div>
 
-        <button className="pillars-btn">Invest Now</button>
+        <button
+          className="pillars-btn"
+          onClick={() => window.open("https://trl.world/", "_blank", "noopener,noreferrer")}
+        >
+          Join The Presale
+        </button>
       </div>
     </section>
   );

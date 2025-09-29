@@ -25,11 +25,11 @@ const steps = [
     content: (
       <ul className="tu-list">
         <li>
-          <i className="tu-ico tu-ico-utility" aria-hidden />
+          <i className="tu-ico tu-ico-earn" aria-hidden />
           <div>Use $TRLCO to pay for services such as home cleaning and utilities.</div>
         </li>
         <li>
-          <i className="tu-ico tu-ico-heart" aria-hidden />
+          <i className="tu-ico tu-ico-gift" aria-hidden />
           <div>
             Enjoy future lifestyle activities supported by $TRLCO, enhancing your living experience.
           </div>
@@ -42,14 +42,14 @@ const steps = [
     content: (
       <ul className="tu-list">
         <li>
-          <i className="tu-ico tu-ico-cashflow" aria-hidden />
+          <i className="tu-ico tu-ico-earn" aria-hidden />
           <div>
             $TRLCO drives real value by enabling greater financial independence and increasing cash
             flow.
           </div>
         </li>
         <li>
-          <i className="tu-ico tu-ico-goals" aria-hidden />
+          <i className="tu-ico tu-ico-gift" aria-hidden />
           <div>
             Token holders benefit from an integrated system that supports their daily needs and
             long-term goals.

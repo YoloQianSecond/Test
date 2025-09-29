@@ -1,0 +1,63 @@
+.roadmap { padding: 12px 0 80px; }
+.rm-intro { text-align:center; padding: 12px 0 24px; }
+.rm-title {
+  font-size: 56px; font-weight: 900; margin: 0 0 10px;
+  background: linear-gradient(90deg,#b45c5f,#6284a7);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.rm-lead { max-width: 960px; margin: 0 auto; color:#585e65; font-size: 20px; line-height: 1.8; }
+
+/* layout */
+.rm-slider {
+  display:grid; grid-template-columns: 320px 1fr; gap: 28px;
+  align-items: start; max-width: 1200px; margin: 10px auto 0; padding: 0 24px;
+}
+.rm-aside { padding-left: 8px; }
+.rm-quarter .q { font-size: 120px; line-height: .9; font-weight: 900; color:#ff5e55; }
+.rm-quarter .y { font-size: 72px; line-height: .9; font-weight: 900; color:#ff5e55; opacity:.9; }
+
+.rm-arrows { display:flex; gap: 16px; margin-top: 18px; }
+.rm-arrow {
+  width: 48px; height: 48px; border-radius: 50%; border: 0; cursor: pointer;
+  background:#e5e9eb; color:#4b4f56; font-size: 28px; font-weight: 700;
+  transition: transform .08s ease, background .2s ease, opacity .2s ease;
+}
+.rm-arrow:hover:not(:disabled) { transform: translateY(-1px); background:#dfe5e8; }
+.rm-arrow:disabled { opacity:.45; cursor: default; }
+
+/* track */
+.rm-viewport {
+  position: relative; overflow: hidden; padding: 18px 6px;
+}
+.rm-track {
+  display:flex; width: 100%;
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+.rm-slide {
+  min-width: 100%; padding: 0 6px 0 12px;
+}
+.rm-card {
+  background:#fff; border-radius: 24px; padding: 28px;
+  box-shadow: 0 30px 70px rgba(10,42,67,.10);
+}
+.rm-sec + .rm-sec { margin-top: 26px; }
+.rm-sec h3 { margin: 0 0 8px; font-size: 28px; color:#1c2f3d; }
+.rm-sec ul { margin: 0; padding-left: 20px; color:#5a6068; line-height: 1.9; }
+
+/* edge fades */
+.rm-fade {
+  position: absolute; top: 0; bottom: 0; width: 42px; pointer-events: none;
+  background: linear-gradient(to right, #fff, rgba(255,255,255,0));
+}
+.rm-fade.right { right: 0; transform: scaleX(-1); }
+.rm-fade.left { left: 0; }
+
+/* responsive */
+@media (max-width: 1024px){
+  .rm-slider { grid-template-columns: 1fr; }
+  .rm-aside { order: 2; text-align: center; }
+  .rm-quarter .q { font-size: 64px; }
+  .rm-quarter .y { font-size: 40px; }
+  .rm-viewport { order: 1; }
+}

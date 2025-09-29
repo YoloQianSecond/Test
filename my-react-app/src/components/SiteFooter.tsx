@@ -26,7 +26,7 @@ const SiteFooter: React.FC = () => {
       <hr className="footer-line" />
 
       <p className="footer-copy">
-        Copyright © 2024 The Real Lifestyle. All Rights Reserved.
+        Copyright © 2025 The Real Lifestyle. All Rights Reserved.
       </p>
     </footer>
   );

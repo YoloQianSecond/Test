@@ -1,0 +1,81 @@
+/* HERO */
+.contact-hero { padding: 40px 0 24px; }
+.contact-hero-inner {
+  position: relative;
+  background: linear-gradient(135deg, #f35a57 0%, #ff8a52 50%, #80a7c1 100%);
+  border-radius: 36px;
+  min-height: 340px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center;
+}
+.contact-hero-copy { padding: 48px 48px 64px; color:#fff; }
+.contact-hero-copy h1 { margin:0 0 16px; font-weight:900; font-size:56px; line-height:1; }
+.contact-hero-copy p { margin:0; font-size:20px; line-height:1.6; opacity:.95; }
+.contact-hero-art { align-self:end; justify-self:end; padding:0 24px 0 0; }
+.contact-hero-art img { max-width:520px; display:block; }
+
+/* FORM CARD */
+.contact-form-wrap { padding: 32px 0 80px; }
+.contact-card {
+  width: min(960px, 92vw);
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px 32px 40px;
+  box-shadow: 0 30px 70px rgba(10,42,67,.10);
+}
+.contact-card h2 {
+  margin: 0 0 18px;
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 900;
+  background: linear-gradient(90deg,#5f3f49,#b28dff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.contact-card label {
+  display:block;
+  font-weight:700;
+  color:#1a2e3b;
+  margin: 14px 0 8px;
+}
+
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid #e8ecef;
+  font-size: 16px;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+  color:#2b3f50;
+}
+
+.contact-card input::placeholder,
+.contact-card textarea::placeholder { color:#8b8f99; }
+
+.contact-card input:focus,
+.contact-card textarea:focus {
+  border-color: #cfd9ff;
+  box-shadow: 0 0 0 4px rgba(135,165,255,.25);
+}
+
+.contact-submit { margin-top: 24px; }
+
+/* reuse pill button styles if you already have them */
+.btn-pill {
+  display:inline-block; padding:16px 28px; border-radius:999px; font-weight:800;
+  text-decoration:none; border:0; transition:transform .06s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-pill.primary { background:#ff6e6e; color:#fff; box-shadow:0 10px 24px rgba(255,110,110,.25); }
+.btn-pill.primary:hover { transform: translateY(-1px); }
+
+/* responsive */
+@media (max-width: 1024px){
+  .contact-hero-inner { grid-template-columns: 1fr; min-height:auto; }
+  .contact-hero-art { display:none; }
+  .contact-hero-copy h1 { font-size: 44px; }
+}

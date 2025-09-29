@@ -26,7 +26,7 @@ const slides: Slide[] = [
     body:
       "TRL's dynamic investment strategy, designed to maximize your returns through a dual-focus approach. Our strategy revolves around sourcing high-potential properties in high-growth markets such as Dubai, Kuala Lumpur, and Bali, with a keen eye on both emerging and undervalued areas. We meticulously evaluate properties using stringent criteria and local market insights to ensure optimal acquisition prices.",
     avatar: "/Yenicon.png",
-    author: "Lydia Tan",
+    author: "Ray Ng",
     role: "Chief Strategy Officer",
   },
   {
